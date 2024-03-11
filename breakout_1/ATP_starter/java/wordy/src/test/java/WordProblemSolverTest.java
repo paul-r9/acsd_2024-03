@@ -10,7 +10,7 @@ public class WordProblemSolverTest {
     // paul
     // vic
     //jd
-    //Etienne
+    // Etienne
     // Sarah
 
     WordProblemSolver solver = new WordProblemSolver();
