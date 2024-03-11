@@ -7,6 +7,12 @@ import org.junit.Test;
 
 public class WordProblemSolverTest {
 
+    // paul
+    // vic
+    //jd
+    //Etienne
+    // Sarah
+
     WordProblemSolver solver = new WordProblemSolver();
 
     @Test
@@ -14,7 +20,6 @@ public class WordProblemSolverTest {
         assertEquals(5, solver.solve("What is 5?"));
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void testSingleAddition1() {
         assertEquals(2, solver.solve("What is 1 plus 1?"));
