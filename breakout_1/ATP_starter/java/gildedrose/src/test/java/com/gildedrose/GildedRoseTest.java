@@ -109,6 +109,31 @@ public class GildedRoseTest {
         // Assert
         assertEquals(21, sut.items[0].quality);
     }
+    @Test
+    public void agedBrieQualityCappedAtMaximum(){
+        // Arrange
+        Item[] items = new Item[] { new Item("Aged Brie", 25, 50) };
+        GildedRose sut = new GildedRose(items);
+
+        // Act
+        sut.updateQuality();
+
+        // Assert
+        assertEquals(50, sut.items[0].quality);
+    }
+
+    @Test
+    public void LegendaryItem_QualityUnchanged(){
+        // Arrange
+        Item[] items = new Item[] { new Item("Sulfuras, Hand of Ragnaros", 25, 80) };
+        GildedRose sut = new GildedRose(items);
+
+        // Act
+        sut.updateQuality();
+
+        // Assert
+        assertEquals(80, sut.items[0].quality);
+    }
 
 }
 
