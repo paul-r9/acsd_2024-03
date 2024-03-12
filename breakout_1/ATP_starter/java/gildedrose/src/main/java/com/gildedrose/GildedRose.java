@@ -1,6 +1,6 @@
 package com.gildedrose;
 
-class GildedRose {
+class  GildedRose {
     Item[] items;
 
     public GildedRose(Item[] items) {

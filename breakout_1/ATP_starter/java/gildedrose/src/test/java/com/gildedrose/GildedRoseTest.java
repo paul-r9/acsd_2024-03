@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class GildedRoseTest {
 
     @Test
-    public void this_test_needs_a_better_name() {
+    public void item_name_does_not_change() {
         // Arrange
         Item[] items = new Item[] { new Item("foo", 0, 0) };
         GildedRose sut = new GildedRose(items);
@@ -16,6 +16,100 @@ public class GildedRoseTest {
         sut.updateQuality();
 
         // Assert
-        assertEquals("fixme", sut.items[0].name);
+        assertEquals("foo", sut.items[0].name);
     }
+
+    @Test
+    public void sellinValueIsDecreasing(){
+        // Arrange
+        Item[] items = new Item[] { new Item("foo", 23, 0) };
+        GildedRose sut = new GildedRose(items);
+
+        // Act
+        sut.updateQuality();
+
+        // Assert
+        assertEquals(22, sut.items[0].sellIn);
+    }
+
+    @Test
+    public void qualityValueIsDecreasing() {
+        // Arrange
+        Item[] items = new Item[] { new Item("foo", 23, 50) };
+        GildedRose sut = new GildedRose(items);
+
+        // Act
+        sut.updateQuality();
+
+        // Assert
+        assertEquals(49, sut.items[0].quality);
+
+    }
+
+    @Test
+    public void qualityDoesNotBecomeNegative() {
+        // Arrange
+        Item[] items = new Item[] { new Item("foo", 23, 0) };
+        GildedRose sut = new GildedRose(items);
+
+        // Act
+        sut.updateQuality();
+
+        // Assert
+        assertEquals(0, sut.items[0].quality);
+
+    }
+
+    @Test
+    public void sellinValueGetsNegative(){
+        // Arrange
+        Item[] items = new Item[] { new Item("foo", 0, 0) };
+        GildedRose sut = new GildedRose(items);
+
+        // Act
+        sut.updateQuality();
+
+        // Assert
+        assertEquals(-1, sut.items[0].sellIn);
+    }
+
+    @Test
+    public void sellingQualityDecresingTwiceAfterSellbyDate(){
+        // Arrange
+        Item[] items = new Item[] { new Item("foo", 0, 40) };
+        GildedRose sut = new GildedRose(items);
+
+        // Act
+        sut.updateQuality();
+
+        // Assert
+        assertEquals(38, sut.items[0].quality);
+    }
+    @Test
+    public void bugQualitySeemsToExceedRecMaximum(){
+        // Arrange
+        Item[] items = new Item[] { new Item("foo", 25, 60) };
+        GildedRose sut = new GildedRose(items);
+
+        // Act
+        sut.updateQuality();
+
+        // Assert
+        assertEquals(59, sut.items[0].quality);
+    }
+    @Test
+    public void agedBrieQualityIncreases(){
+        // Arrange
+        Item[] items = new Item[] { new Item("Aged Brie", 25, 20) };
+        GildedRose sut = new GildedRose(items);
+
+        // Act
+        sut.updateQuality();
+
+        // Assert
+        assertEquals(21, sut.items[0].quality);
+    }
+
 }
+
+
