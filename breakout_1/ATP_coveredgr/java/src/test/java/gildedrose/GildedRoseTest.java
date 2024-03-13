@@ -160,4 +160,18 @@ public class GildedRoseTest {
 
     //TODO: NEW BEHAVIOR
     // conjured items
+
+    @Test
+    void ConjuredItem_QualityDecreasesBeforeSellInDate() {
+        GildedRose sut = new GildedRose(createItemArray("Conjured item", 5, 10));
+        sut.updateQuality();
+        assertEquals(8, sut.items[0].quality, "Item quality should only decrease by 2 each day");
+    }
+
+    @Test
+    void ConjuredItem_QualityDecreaseAfterSellInDate() {
+        GildedRose sut = new GildedRose(createItemArray("Conjured item", 0, 10));
+        sut.updateQuality();
+        assertEquals(6, sut.items[0].quality, "Item quality should only decrease by 2 each day");
+    }
 }

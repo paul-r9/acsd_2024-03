@@ -1,5 +1,6 @@
 Feature: Gilded Rose conjured item
   I want to know the quality is updated properly
+  Conjured decrease twice as fast in quality
 
   Scenario: Conjured item before SellIn date
     Given The item as "Conjured Mana Bun"

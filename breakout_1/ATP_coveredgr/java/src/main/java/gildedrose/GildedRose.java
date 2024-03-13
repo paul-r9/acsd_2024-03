@@ -4,6 +4,7 @@ class GildedRose {
     public static final String AGED_BRIE = "Aged Brie";
     public static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
     public static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
+
     Item[] items;
 
     public GildedRose(Item[] items) {
@@ -14,8 +15,7 @@ class GildedRose {
         for (int i = 0; i < items.length; i++) {
             Item item = items[i];
 
-            if (!item.name.equals(AGED_BRIE)
-                    && !item.name.equals(BACKSTAGE_PASSES)) {
+            if (doesntImproveWithAge(item)) {
                 decrementQualityIfNotLegendary(item);
             } else {
                 incrementQualityForItemsThatGetBetterWithAge(item);
@@ -27,6 +27,11 @@ class GildedRose {
                 handleExpiredItem(item);
             }
         }
+    }
+
+    private static boolean doesntImproveWithAge(Item item) {
+        return !item.name.equals(AGED_BRIE)
+                && !item.name.equals(BACKSTAGE_PASSES);
     }
 
     private static void incrementQualityForItemsThatGetBetterWithAge(Item item) {
@@ -66,10 +71,8 @@ class GildedRose {
             }
         }
 
-        if (isLastFiveDays(item)) {
-            if (isUnderMaxQuality(item)) {
+        if (isLastFiveDays(item) && (isUnderMaxQuality(item))) {
                 incrementItemQuality(item);
-            }
         }
     }
 
@@ -91,6 +94,9 @@ class GildedRose {
 
     private static void decrementQualityIfNotLegendary(Item item) {
         if (hasQuality(item)) {
+            if (item.name.startsWith("Conjured")){
+                decrementItemQuality(item);
+            }
             if (!item.name.equals(SULFURAS)) {
                 decrementItemQuality(item);
             }
