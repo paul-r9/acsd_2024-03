@@ -13,15 +13,8 @@ public class LaunchOrderListingTest {
     public void LaunchesAre_SortedByDestination_DestinationsAreUnique() {
         // Step 1. Create LaunchInfoProviderStub (that implements ISpacelineLaunchInfoProvider)
         ISpacelineLaunchInfoProvider mock = new MockProvider();
-        ArrayList<LaunchInfo> list = new ArrayList<>();
-        LaunchInfo destination1 = new LaunchInfo(null);
-        LaunchInfo destination2 = new LaunchInfo(null);
-        destination1.setDestination("Venus");
-        destination2.setDestination("Mars");
-        list.add(destination1);
-        list.add(destination2);
-
-        ((MockProvider)mock).list = list;
+        ((MockProvider)mock).addDestination("Venus");
+        ((MockProvider)mock).addDestination("Mars");
 
         // Step 2 & 3 & 4. Create SUT - SpaceportDepartureBoard, using Constructor Injection
         // Exercising this behavior happens during construction of the System Under Test
